@@ -4,13 +4,16 @@ import classes from './App.module.scss';
 
 const App = () => {
   const [time, setTime] = useState(0);
-  const [laps, setLaps] = useState([]);
   const [isStopped, setIsStopped] = useState(true);
+
+  const [laps, setLaps] = useState([]);
+  const [lastLapTime, setLastLapTime] = useState(0);
+
   const [minLapIndex, setMinLapIndex] = useState();
   const [maxLapIndex, setMaxLapIndex] = useState();
 
   const lap = () => {
-    const lap = time - (laps[0] || 0);
+    const lap = time - lastLapTime;
     setLaps([lap, ...laps]);
   };
 
@@ -30,14 +33,16 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isStopped) {
-        setTime((prevTime) => prevTime + 100);
+        setTime((prevTime) => prevTime + 50);
       }
-    }, 100);
+    }, 50);
 
     return () => clearInterval(interval);
   }, [isStopped]);
 
   useEffect(() => {
+    setLastLapTime(time);
+
     if (laps.length >= 3) {
       const minIndex = laps.indexOf(Math.min(...laps));
       setMinLapIndex(minIndex);
