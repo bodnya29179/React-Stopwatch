@@ -6,16 +6,8 @@ const App = () => {
   const [time, setTime] = useState(0);
   const [laps, setLaps] = useState([]);
   const [isStopped, setIsStopped] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isStopped) {
-        setTime((prevTime) => prevTime + 100);
-      }
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, [isStopped]);
+  const [minLapIndex, setMinLapIndex] = useState();
+  const [maxLapIndex, setMaxLapIndex] = useState();
 
   const lap = () => {
     const lap = time - (laps[0] || 0);
@@ -34,6 +26,26 @@ const App = () => {
   const stop = () => {
     setIsStopped(true);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isStopped) {
+        setTime((prevTime) => prevTime + 100);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [isStopped]);
+
+  useEffect(() => {
+    if (laps.length >= 3) {
+      const minIndex = laps.indexOf(Math.min(...laps));
+      setMinLapIndex(minIndex);
+
+      const maxIndex = laps.indexOf(Math.max(...laps))
+      setMaxLapIndex(maxIndex);
+    }
+  }, [laps]);
 
   return (
     <div className={classes.container}>
@@ -70,10 +82,13 @@ const App = () => {
       <div className={classes.laps}>
         {
           !!laps.length && laps.map((lap, index) => (
-            <div key={index} className={classes.lap}>
+            <div
+              key={index}
+              className={`${classes.lap} ${minLapIndex === index && classes.min} ${maxLapIndex === index && classes.max}`}
+            >
               <span>Lap {laps.length - index} </span>
 
-              <span>{ convertMillisecondsToTime(lap - (laps[index + 1] || 0)) }</span>
+              <span>{convertMillisecondsToTime(lap)}</span>
             </div>
           ))
         }

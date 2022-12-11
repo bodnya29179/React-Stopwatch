@@ -12,7 +12,7 @@
   justify-content: center;
   gap: 20px;
 
-  height: 100vh;
+  min-height: 100vh;
   color: #ffffff;
   background-color: #1e1e1e;
 }
@@ -60,5 +60,13 @@
 
   & >:first-child {
     flex: 1;
+  }
+
+  &.min {
+    color: #008000;
+  }
+
+  &.max {
+    color: #ff0000;
   }
 }
