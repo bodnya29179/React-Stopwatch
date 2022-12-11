@@ -1,0 +1,64 @@
+@import 'src/styles/fonts';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  height: 100vh;
+  color: #ffffff;
+  background-color: #1e1e1e;
+}
+
+.buttons,
+.lap {
+  display: flex;
+  gap: 20px;
+}
+
+.clock {
+  font-family: Digital, sans-serif;
+  font-size: 6rem;
+}
+
+.button {
+  color: white;
+  background: transparent;
+  font-size: 2.5rem;
+  font-family: DIGITAL, sans-serif;
+
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 2px solid white;
+
+  &:disabled {
+    color: #696969;
+    border-color: #696969;
+    cursor: default;
+  }
+}
+
+.laps {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 30px;
+  font-family: DIGITAL, sans-serif;
+  width: 18rem;
+}
+
+.lap {
+  display: flex;
+
+  & >:first-child {
+    flex: 1;
+  }
+}
