@@ -26,6 +26,15 @@
 .clock {
   font-family: Digital, sans-serif;
   font-size: 6rem;
+
+  & > *:not(:nth-child(3)):not(:nth-child(6)) {
+    min-width: 46px;
+  }
+
+  & > * {
+    display: inline-block;
+    text-align: end;
+  }
 }
 
 .button {

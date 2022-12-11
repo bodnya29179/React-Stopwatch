@@ -54,7 +54,13 @@ const App = () => {
 
   return (
     <div className={classes.container}>
-      <span className={classes.clock}>{convertMillisecondsToTime(time)}</span>
+      <span className={classes.clock}>
+        {
+          convertMillisecondsToTime(time)
+            .split('')
+            .map((symbol) => <span>{symbol}</span>)
+        }
+      </span>
 
       <div className={classes.buttons}>
         {
