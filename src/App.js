@@ -58,7 +58,7 @@ const App = () => {
         {
           convertMillisecondsToTime(time)
             .split('')
-            .map((symbol) => <span>{symbol}</span>)
+            .map((symbol, index) => <span key={index}>{symbol}</span>)
         }
       </span>
 
@@ -97,7 +97,7 @@ const App = () => {
               key={index}
               className={`${classes.lap} ${minLapIndex === index && classes.min} ${maxLapIndex === index && classes.max}`}
             >
-              <span>Lap {laps.length - index} </span>
+              <span>Lap {laps.length - index}</span>
 
               <span>{convertMillisecondsToTime(lap)}</span>
             </div>
