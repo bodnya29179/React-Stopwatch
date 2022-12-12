@@ -92,6 +92,16 @@ const App = () => {
 
       <div className={classes.laps}>
         {
+          !!time && (
+            <div className={`${classes.lap} ${classes.predictableLap}`}>
+              <span>Lap {laps.length + 1}</span>
+
+              <span>{convertMillisecondsToTime(time - lastLapTime)}</span>
+            </div>
+          )
+        }
+
+        {
           !!laps.length && laps.map((lap, index) => (
             <div
               key={index}
